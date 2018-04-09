@@ -1,0 +1,7 @@
+{
+  "name": "hackernews-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Gaston Longhitano <gaston@juntacorp.com>",
+  "license": "MIT"
+}
