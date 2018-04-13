@@ -1,5 +1,11 @@
 const { GraphQLServer } = require('graphql-yoga')
 
+let links = [{
+  id: 'link-0',
+  url: 'www.anyurl.com',
+  description: 'This is a description'
+}]
+
 // 1
 const typeDefs = `
 type Query {
@@ -16,8 +22,15 @@ type Link {
 // 2
 const resolvers = {
 	Query: {
-		info: () => `This is the API of a Hackernews Clone`
+		info: () => `This is the API of a Hackernews Clone`,
+		feed: () => links,
+	},
+	Link: {
+		id: (root) => root.id,
+		description: (root) => root.description,
+		url: (root) => root.url,
 	}
+
 }
 
 // 3
