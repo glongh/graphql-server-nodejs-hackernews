@@ -1,0 +1,11 @@
+# The service name, this will be part of the endpoint of the Prisma API
+service: hackernews-node
+
+# The deployment stage, this will also be part of the API endpoint
+stage: dev
+
+# Points to the file that holds your data model
+datamodel: datamodel.graphql
+
+# You can only access the API when providing JWTs that are signed with this secret
+secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlcnZpY2UiOiJoYWNrZXJuZXdzLW5vZGVAZGV2Iiwicm9sZXMiOlsiYWRtaW4iXX0sImlhdCI6MTUyMzkxMTI5NCwiZXhwIjoxNTI0NTE2MDk0fQ.y9N0JcDpmMQ8q4-P021-4VdwiiPV4pMBhxjm_WPfI7M
