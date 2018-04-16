@@ -29,15 +29,23 @@ const resolvers = {
 				url: args.url,
 			}
 			links.push(link)
+			
 			return link
 		},
 		deleteLink: (root, { id }) => {
 			link = links.find(link => link.id === id)
 			links = links.filter(link => link.id !== id)
+
 			return link
 		},
 		updateLink: (root, args) => {
-			//TODO: Implement update link resolver function.
+			const index = links.findIndex(link => link.id === args.id)
+
+			if (index > -1) {
+				return links[index] = { ...links[index], ...args }
+			} else {
+				return null
+			}		
 		}
 	}
 }
