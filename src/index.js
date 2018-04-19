@@ -1,51 +1,20 @@
 const { GraphQLServer } = require('graphql-yoga')
 
-let links = [{
-  id: 'link-0',
-  url: 'www.anyurl.com',
-  description: 'This is a description'
-}, {
-  id: 'link-1',
-  url: 'www.anyurl.com',
-  description: 'This is a description'
-}, {
-  id: 'link-2',
-  url: 'www.anyurl.com',
-  description: 'This is a description'
-}]
-
-let idCount = links.length
 const resolvers = {
 	Query: {
 		info: () => `This is the API of a Hackernews Clone`,
-		feed: () => links,
-		link: (root, { id }) => links.find(link => link.id === id)
+		feed: (root, args, context, info) => {
+			return context.db.query.links({}, info)
+		},
 	},
 	Mutation: {
-		post: (root, args) => {
-			const link = {
-				id: `link-${idCount++}`,
-				description: args.description,
-				url: args.url,
-			}
-			links.push(link)
-			
-			return link
-		},
-		deleteLink: (root, { id }) => {
-			link = links.find(link => link.id === id)
-			links = links.filter(link => link.id !== id)
-
-			return link
-		},
-		updateLink: (root, args) => {
-			const index = links.findIndex(link => link.id === args.id)
-
-			if (index > -1) {
-				return links[index] = { ...links[index], ...args }
-			} else {
-				return null
-			}		
+		post: (root, args, context, info) => {
+			return context.db.mutation.createLink({
+				data: {
+					url: args.url,
+					description: args.description,
+				},
+			}, info)
 		}
 	}
 }
