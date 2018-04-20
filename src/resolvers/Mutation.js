@@ -16,14 +16,14 @@ async function signup(parent, args, context, info) {
 
 	//Store the new User using the Prisma instance.
 	const user = await context.db.mutation.createUser({
-		date: { ...args, password }, 
+		data: { ...args, password }, 
 	}, `{ id }`)
 
 	//Generating JWT signed with APP_SECRET
 	const token = jwt.sign({ userId: user.id }, APP_SECRET)
 
 	return {
-		toker,
+		token,
 		user
 	}
 }
@@ -56,7 +56,6 @@ async function login(parent, args, context, info) {
 		user
 	}
 }
-
 
 /**
  * Post mutation
