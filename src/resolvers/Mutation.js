@@ -61,9 +61,9 @@ async function login(parent, args, context, info) {
  * Post mutation
  * Create link using the User coming in the jwt
  */
-function post(parent, args, context, info) {
+async function post(parent, args, context, info) {
 	const userId = getUserId(context)
-	return context.db.mutation.createLink({
+	return await context.db.mutation.createLink({
 		data: {
 			url: args.url,
 			description: args.description,
