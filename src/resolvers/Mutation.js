@@ -78,6 +78,7 @@ async function post(parent, args, context, info) {
  * Create a vote element that's connected to the User and the Link
  */
 async function vote(parent, args, context, info) {
+	
 	//Validate the incoming JWT with the getUserId helper function
 	const userId = getUserId(context)
 
