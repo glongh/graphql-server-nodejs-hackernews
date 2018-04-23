@@ -22,6 +22,10 @@ function newVoteSubscription (parent, args, context, info) {
 	) 
 }
 
+const newVote = {
+	subscribe: newVoteSubscription
+}
+
 module.exports = {
   newLink,
   newVote
