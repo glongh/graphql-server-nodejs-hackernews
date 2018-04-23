@@ -73,8 +73,34 @@ async function post(parent, args, context, info) {
 }
 
 
+/**
+ * Vote mutation
+ * Create a vote element that's connected to the User and the Link
+ */
+async function vote(parent, args, context, info) {
+	//Validate the incoming JWT with the getUserId helper function
+	const userId = getUserId(context)
+
+	const linkExists = await context.db.exists.Vote({
+		user: { id: userId },
+		link: { id: args.linkId },
+	})
+	if (linkExists) {
+		throw new Error(`Already voted for link: ${args.linkId}`)
+	}
+
+	return context.db.mutation.createVote({
+		data: {
+			user: { connect: { id: userId } },
+			link: { connect: { id: args.linkId } },
+		},
+	}, info)
+
+}
+
 module.exports = {
 	signup,
 	login,
-	post
+	post,
+	vote
 }

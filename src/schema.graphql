@@ -1,4 +1,5 @@
-# import { Link, LinkSubscriptionPayload } from "./generated/prisma.graphql"
+# import { Link, LinkSubscriptionPayload, Vote } from "./generated/prisma.graphql"
+
 
 type Query {
 	info: String!
